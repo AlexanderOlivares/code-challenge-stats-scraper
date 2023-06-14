@@ -6,9 +6,10 @@ import os
 import time
 import sentry_sdk
 from utils.db import select_all, create_table, update_table
+from env_conifgs import sentry_dsn
 
 sentry_sdk.init(
-    dsn="https://267bf5c2907c4df6a33e064e046120e8@o1142418.ingest.sentry.io/6683044",
+    dsn=sentry_dsn,
     traces_sample_rate=1.0
 )
 
