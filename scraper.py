@@ -6,17 +6,16 @@ import os
 import time
 import sentry_sdk
 from utils.db import select_all, create_table, update_table
-from env_conifgs import sentry_dsn
-
-sentry_sdk.init(
-    dsn=sentry_dsn,
-    traces_sample_rate=1.0
-)
 
 if "PRODUCTION" in os.environ:
     from env_conifgs import prod_config as config
 else:
     from env_conifgs import dev_config as config
+
+sentry_sdk.init(
+    dsn=config.sentry_dsn,
+    traces_sample_rate=1.0
+)
 
 try:
     driver = config.driver
