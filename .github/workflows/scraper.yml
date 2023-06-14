@@ -2,6 +2,8 @@ name: Run scraper
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 12 * * 3" # Run at 12 PM (noon) every Wed in UTC time
 
 jobs:
   build:
@@ -22,11 +24,10 @@ jobs:
           chromedriver --url-base=/wd/hub &
           sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # Optional: Starts Xvfb with specified display size
 
-      # Add additional steps if needed
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.9" # Specify the Python version you want to use
+          python-version: "3.9"
 
       - name: Install dependencies
         run: |
